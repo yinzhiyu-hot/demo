@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--suppress ALL -->
+<mapper namespace="cn.wangoon.dao.mapper.SyncTaskMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.wangoon.domain.entity.SyncTask">
+        <id column="id" property="id"/>
+        <result column="task_type" property="taskType"/>
+        <result column="task_status" property="taskStatus"/>
+        <result column="task_desc" property="taskDesc"/>
+        <result column="process_count" property="processCount"/>
+        <result column="create_date" property="createDate"/>
+        <result column="finish_date" property="finishDate"/>
+        <result column="ts" property="ts"/>
+    </resultMap>
+
+    <resultMap id="chartMap" type="cn.wangoon.domain.vo.SyncTaskChartVO">
+        <id column="id" property="id"/>
+        <result column="task_status" property="taskStatus"/>
+        <result column="numbers" property="numbers"/>
+        <result column="create_date" property="date"/>
+    </resultMap>
+
+    <resultMap id="listTaskTwoLevelTaskDataByPageMap" type="cn.wangoon.domain.entity.SyncTask">
+        <id column="id" property="id"/>
+        <result column="task_type" property="taskType"/>
+        <result column="task_status" property="taskStatus"/>
+        <result column="task_desc" property="taskDesc"/>
+        <result column="process_count" property="processCount"/>
+        <result column="create_date" property="createDate"/>
+        <result column="finish_date" property="finishDate"/>
+        <result column="ts" property="ts"/>
+
+        <!-- 这句特别重要，它的作用就是将getOmsSelfDeliveryOrderItemSplitListById取出的结果集映射到OmsSelfDeliveryOrderVO这个Javabean中的itemSplitList属性 -->
+        <collection property="syncTaskDataList" column="id" ofType="cn.wangoon.domain.entity.SyncTaskData"
+                    select="getSyncTaskDataListById"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,
+        task_type,
+        task_status,
+        task_desc,
+        process_count,
+        create_date,
+        finish_date,
+        ts
+    </sql>
+
+    <!--根据ID进行分片查询任务 and (id % #{mol} = #{molValue})-->
+    <select id="getProcessTaskList" resultMap="BaseResultMap" parameterType="cn.wangoon.domain.dto.SyncTaskDto">
+        select
+        <include refid="Base_Column_List"/>
+        from sync_task
+        where task_status in (0, 1)
+          and task_type = #{taskType}
+        <![CDATA[
+          and process_count < #{retryCount}
+        ]]>
+    </select>
+
+    <select id="getTaskChartsList" resultMap="chartMap" parameterType="cn.wangoon.domain.dto.SyncTaskDto">
+        <![CDATA[
+        SELECT COUNT(id)                            AS numbers,
+               DATE_FORMAT(create_date, '%Y-%m-%d') AS create_date,
+               task_status                          AS task_status
+        FROM sync_task
+        WHERE create_date < DATE_SUB(CURDATE(), INTERVAL -1 DAY)
+          AND create_date >= DATE_SUB(CURDATE(), INTERVAL 6 DAY)
+        GROUP BY DATE_FORMAT(create_date, '%Y-%m-%d'), task_status
+        ORDER BY create_date ASC;
+        ]]>
+    </select>
+
+    <select id="getProcessFailTask" resultMap="BaseResultMap" parameterType="String">
+        select
+        <include refid="Base_Column_List"/>
+        from sync_task
+        WHERE task_type = 'ALLOCATION_ORDER_FBA'
+          AND task_status = 3
+          AND SUBSTRING(task_desc, 18) = #{orderNumber}
+    </select>
+
+    <select id="listSyncTaskByPage" resultMap="listTaskTwoLevelTaskDataByPageMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        from sync_task
+        <where>
+            ${ew.sqlSegment}
+        </where>
+
+        order by id desc
+    </select>
+
+    <select id="getSyncTaskDataListById" resultType="cn.wangoon.domain.entity.SyncTaskData">
+        select id,
+               task_id,
+               task_data,
+               data_index
+        from sync_task_data
+        where task_id = #{id}
+    </select>
+
+    <select id="getDataCarryForwardSyncTaskList" resultType="Long" parameterType="String">
+        <![CDATA[
+        SELECT id
+        FROM sync_task
+        WHERE create_date <= #{createDate,jdbcType=VARCHAR}
+        ]]>
+    </select>
+
+    <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into sync_task
+                (task_type, task_desc, task_status, process_count, create_date, finish_date, ts)
+                values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.taskType,jdbcType=VARCHAR}, #{item.taskDesc,jdbcType=VARCHAR}, #{item.taskStatus,jdbcType=TINYINT},
+             #{item.processCount,jdbcType=INTEGER}, #{item.createDate,jdbcType=TIMESTAMP}, #{item.finishDate,jdbcType=TIMESTAMP},
+             #{item.ts,jdbcType=TIMESTAMP})
+        </foreach>
+    </insert>
+</mapper>

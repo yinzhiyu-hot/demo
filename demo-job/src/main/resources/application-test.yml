@@ -1,0 +1,59 @@
+spring:
+  # 配置数据源
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/demo?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8&allowMultiQueries=true
+      username: root
+      password: root
+      type: com.alibaba.druid.pool.DruidDataSource
+
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+      max-wait: 30000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: select '1' from dual
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-open-prepared-statements: 20
+      max-pool-prepared-statement-per-connection-size: 20
+
+  redis:
+    database: 9
+    host: ${REDIS-HOST:127.0.0.1}
+    port: 6379
+    password:
+
+# mybatis-plus相关配置
+mybatis-plus:
+  configuration:
+    # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#Zookeeper
+regCenter:
+  serverList: localhost:2181
+  namespace: demo-job
+
+#业务系统Rest Api Url
+rest:
+  dingding:
+    #domain: http://api.wangoon.store  http://api-ngrok.wangoon.store
+    domain: http://api-ngrok.wangoon.store
+
+#日志配置
+logging:
+  level:
+    cn.wangoon.*: debug
+
+#Oms 邮件收件人配置(多个请用;拼接)
+Mail:
+  username:
+    ##收件人列表(多个请用;拼接)
+    to: thomasyin2021@126.com
+    ##抄送人列表(多个请用;拼接)，此处默认填写发件人邮件，防止554错误
+    cc: thomasyin2021@126.com

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wangoon.dao.mapper.OmsLogMapper">
+    <resultMap id="BaseResultMap" type="cn.wangoon.domain.entity.SysLog">
+        <!--@mbg.generated-->
+        <!--@Table sys_log-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="platform" jdbcType="VARCHAR" property="platform"/>
+        <result column="site" jdbcType="VARCHAR" property="site"/>
+        <result column="merchant" jdbcType="VARCHAR" property="merchant"/>
+        <result column="business_key" jdbcType="VARCHAR" property="businessKey"/>
+        <result column="original_fbm_sku" jdbcType="VARCHAR" property="originalFbmSku"/>
+        <result column="fbm_sku" jdbcType="VARCHAR" property="fbmSku"/>
+        <result column="plat_sku" jdbcType="VARCHAR" property="platSku"/>
+        <result column="sku" jdbcType="VARCHAR" property="sku"/>
+        <result column="upc" jdbcType="VARCHAR" property="upc"/>
+        <result column="fn_sku" jdbcType="VARCHAR" property="fnSku"/>
+        <result column="message" jdbcType="VARCHAR" property="message"/>
+        <result column="record_date" jdbcType="VARCHAR" property="recordDate"/>
+        <result column="ts" jdbcType="TIMESTAMP" property="ts"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, platform, site, merchant, business_key,original_fbm_sku, fbm_sku, plat_sku, sku, upc, fn_sku,
+        message, record_date, ts
+    </sql>
+
+    <delete id="dataCarryForward" parameterType="String">
+        <![CDATA[
+        DELETE
+        FROM sys_log
+        WHERE record_date <= #{recordDate,jdbcType=VARCHAR}
+        ]]>
+    </delete>
+</mapper>
