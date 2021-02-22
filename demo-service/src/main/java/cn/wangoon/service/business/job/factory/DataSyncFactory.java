@@ -1,4 +1,4 @@
-package cn.wangoon.job.factory;
+package cn.wangoon.service.business.job.factory;
 
 /**
  * 数据同步工厂

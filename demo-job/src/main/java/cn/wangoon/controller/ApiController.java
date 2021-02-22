@@ -2,7 +2,7 @@ package cn.wangoon.controller;
 
 import cn.wangoon.domain.common.BussinessBody;
 import cn.wangoon.domain.common.Result;
-import cn.wangoon.service.business.base.OmsApiService;
+import cn.wangoon.service.business.api.common.OmsApiService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

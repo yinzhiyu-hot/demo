@@ -15,7 +15,7 @@ import cn.wangoon.domain.entity.SyncTaskData;
 import cn.wangoon.domain.entity.SyncTaskException;
 import cn.wangoon.domain.entity.SysJobConfig;
 import cn.wangoon.domain.query.SysJobConfigQuery;
-import cn.wangoon.job.factory.DataSyncFactory;
+import cn.wangoon.service.business.job.factory.DataSyncFactory;
 import cn.wangoon.service.business.base.*;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.dangdang.ddframe.job.api.ShardingContext;

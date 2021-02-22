@@ -1,4 +1,4 @@
-package cn.wangoon.service.business.base.impl;
+package cn.wangoon.service.business.api.common.impl;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.wangoon.common.utils.CastUtil;
@@ -6,7 +6,7 @@ import cn.wangoon.common.utils.LogUtils;
 import cn.wangoon.common.utils.SpringBootBeanUtil;
 import cn.wangoon.domain.common.BussinessBody;
 import cn.wangoon.domain.common.Result;
-import cn.wangoon.service.business.base.OmsApiService;
+import cn.wangoon.service.business.api.common.OmsApiService;
 import cn.wangoon.service.enums.ApiEnum;
 import org.springframework.stereotype.Service;
 

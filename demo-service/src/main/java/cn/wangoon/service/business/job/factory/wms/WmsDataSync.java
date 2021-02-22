@@ -1,10 +1,10 @@
-package cn.wangoon.job.factory.wms;
+package cn.wangoon.service.business.job.factory.wms;
 
 import cn.wangoon.common.enums.SyncTaskTypeEnum;
 import cn.wangoon.common.utils.SpringBootBeanUtil;
 import cn.wangoon.domain.entity.SyncTask;
-import cn.wangoon.job.factory.DataSync;
-import cn.wangoon.job.sync.wms.biz.impl.WmsDataSyncServiceImpl;
+import cn.wangoon.service.business.job.factory.DataSync;
+import cn.wangoon.service.business.job.impl.WmsDataSyncServiceImpl;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;

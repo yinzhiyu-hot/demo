@@ -1,4 +1,4 @@
-package cn.wangoon.job.listener;
+package cn.wangoon.job.common.listener;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;

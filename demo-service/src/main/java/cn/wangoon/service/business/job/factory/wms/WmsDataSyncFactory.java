@@ -1,9 +1,9 @@
-package cn.wangoon.job.factory.wms;
+package cn.wangoon.service.business.job.factory.wms;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.wangoon.common.utils.SpringBootBeanUtil;
-import cn.wangoon.job.factory.DataSync;
-import cn.wangoon.job.factory.DataSyncFactory;
+import cn.wangoon.service.business.job.factory.DataSync;
+import cn.wangoon.service.business.job.factory.DataSyncFactory;
 import org.springframework.stereotype.Component;
 
 /**

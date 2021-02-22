@@ -1,4 +1,4 @@
-package cn.wangoon.job.factory;
+package cn.wangoon.service.business.job.factory;
 
 import cn.hutool.core.util.RandomUtil;
 import cn.wangoon.common.utils.LogUtils;

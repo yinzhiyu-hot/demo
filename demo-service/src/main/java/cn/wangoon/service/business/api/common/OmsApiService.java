@@ -1,4 +1,4 @@
-package cn.wangoon.service.business.base;
+package cn.wangoon.service.business.api.common;
 
 import cn.wangoon.domain.common.BussinessBody;
 import cn.wangoon.domain.common.Result;

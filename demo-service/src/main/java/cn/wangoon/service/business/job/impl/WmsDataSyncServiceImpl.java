@@ -1,7 +1,7 @@
-package cn.wangoon.job.sync.wms.biz.impl;
+package cn.wangoon.service.business.job.impl;
 
 import cn.wangoon.domain.entity.SyncTask;
-import cn.wangoon.job.sync.wms.biz.WmsDataSyncService;
+import cn.wangoon.service.business.job.WmsDataSyncService;
 import org.springframework.stereotype.Component;
 
 /**

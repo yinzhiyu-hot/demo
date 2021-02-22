@@ -1,4 +1,4 @@
-package cn.wangoon.job.datacarry.synctask;
+package cn.wangoon.job.common.datacarry;
 
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
