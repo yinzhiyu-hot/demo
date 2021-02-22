@@ -73,10 +73,11 @@ public class SystemListenerJob extends BaseSimpleJob {
 
     /*
      * @Description 同步JOB配置 [多实例部署时，监控其它实例是否有更新配置，有则同步]
+     * @Remark 此处适用双实例，超过2个则建议采用MQ消息广发处理
      * @Params ==>
      * @Return void
-     * @Date 2020/5/22 9:25
-     * @Auther YINZHIYU
+     * @Date 2021/2/22 15:28
+     * @Auther Thomas
      */
     private void syncSysJobConfigCache() {
         try {
@@ -142,10 +143,11 @@ public class SystemListenerJob extends BaseSimpleJob {
 
     /*
      * @Description 同步基础配置 [多实例部署时，监控其它实例是否有更新配置，有则同步]
+     * @Remark 此处适用双实例部署，超过2个则建议采用MQ消息广发处理
      * @Params ==>
      * @Return void
-     * @Date 2020/5/22 9:25
-     * @Auther YINZHIYU
+     * @Date 2021/2/22 15:28
+     * @Auther Thomas
      */
     private void syncSysBaseConfigCache() {
         try {

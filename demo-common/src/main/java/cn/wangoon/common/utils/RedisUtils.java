@@ -228,6 +228,57 @@ public class RedisUtils {
     }
 
     /**
+     * @Description 将值放入缓存
+     * @Params ==>
+     * @Param key
+     * @Param value
+     * @Return void
+     * @Date 2020/4/21 9:48
+     * @Auther YINZHIYU
+     */
+    public void setForList(String key, Object value) {
+        try {
+            List list = CastUtil.cast(get(key));
+            if (ObjectUtil.isEmpty(list)) {
+                list = Lists.newArrayList();
+            }
+            list.add(value);
+            redisTemplate.opsForValue().set(key, list);
+        } catch (Exception e) {
+            LogUtils.error(key, value, "操作Redis ==> 异常", e);
+        }
+    }
+
+    /**
+     * @Description 将值放入缓存并设置时间
+     * @Params ==>
+     * @Param key
+     * @Param value
+     * @Param time  时间(秒) time要大于0 如果time小于等于0 将设置无限期
+     * @Return void
+     * @Date 2020/4/21 9:48
+     * @Auther YINZHIYU
+     */
+    public void setForList(String key, Object value, long time) {
+
+        try {
+            List list = CastUtil.cast(get(key));
+            if (ObjectUtil.isEmpty(list)) {
+                list = Lists.newArrayList();
+            }
+            list.add(value);
+
+            if (time > 0) {
+                redisTemplate.opsForValue().set(key, value, time, TimeUnit.SECONDS);
+            } else {
+                redisTemplate.opsForValue().set(key, value);
+            }
+        } catch (Exception e) {
+            LogUtils.error(key, value, "操作Redis ==> 异常", e);
+        }
+    }
+
+    /**
      * @Description 批量添加 key (重复的键会覆盖)
      * @Params ==>
      * @Param keyAndValue
