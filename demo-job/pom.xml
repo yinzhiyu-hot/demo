@@ -2,12 +2,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>demo</artifactId>
         <groupId>cn.demo</groupId>
         <version>1.0.0</version>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
 
     <description>JOB层</description>
     <name>demo-job</name>
@@ -15,6 +15,22 @@
     <packaging>jar</packaging>
 
     <dependencies>
+        <!-- 模块依赖 -->
+        <dependency>
+            <groupId>cn.demo</groupId>
+            <artifactId>demo-service</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.demo</groupId>
+            <artifactId>demo-common</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.demo</groupId>
+            <artifactId>demo-client</artifactId>
+            <version>1.0.0</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-undertow</artifactId>
@@ -38,33 +54,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
-
-
-
-        <dependency>
-            <groupId>cn.demo</groupId>
-            <artifactId>demo-service</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>cn.demo</groupId>
-            <artifactId>demo-common</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>cn.demo</groupId>
-            <artifactId>demo-client</artifactId>
-            <version>1.0.0</version>
-        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.13</version>
             <scope>test</scope>
         </dependency>
-
-
     </dependencies>
 
     <build>

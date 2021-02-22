@@ -7,12 +7,26 @@
         <artifactId>demo</artifactId>
         <version>1.0.0</version>
     </parent>
+
     <description>API层</description>
     <name>demo-api</name>
     <artifactId>demo-api</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>
+
+        <!-- 模块依赖 -->
+        <dependency>
+            <groupId>cn.demo</groupId>
+            <artifactId>demo-service</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.demo</groupId>
+            <artifactId>demo-common</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-undertow</artifactId>
@@ -35,19 +49,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
-
-
-
-        <dependency>
-            <groupId>cn.demo</groupId>
-            <artifactId>demo-service</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>cn.demo</groupId>
-            <artifactId>demo-common</artifactId>
-            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
