@@ -2,7 +2,11 @@ package cn.wangoon.controller.manager;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.wangoon.cache.SysBaseConfigCache;
+import cn.wangoon.common.config.NetConfig;
+import cn.wangoon.common.constants.RedisConstants;
 import cn.wangoon.common.enums.DelFlagEnum;
+import cn.wangoon.common.utils.LogUtils;
+import cn.wangoon.common.utils.RedisUtils;
 import cn.wangoon.domain.common.Result;
 import cn.wangoon.domain.entity.SysBaseConfig;
 import cn.wangoon.domain.query.SysBaseConfigQuery;
@@ -38,10 +42,16 @@ import java.util.Map;
 public class BaseManagerCenterController {
 
     @Resource
+    RedisUtils redisUtils;
+
+    @Resource
     public SysBaseConfigCache sysBaseConfigCache;
 
     @Resource
     private SysBaseConfigService sysBaseConfigService;
+
+    @Resource
+    private NetConfig netConfig;
 
     /**
      * @Description 基础配置页面
@@ -110,6 +120,7 @@ public class BaseManagerCenterController {
                 sysBaseConfigCache.init();
 
                 sysBaseConfig.setOperateDesc("删除");
+                noticeSyncSysBaseConfigCache(sysBaseConfig);
             }
         } catch (Exception e) {
             return Result.exception(e.getMessage());
@@ -141,6 +152,7 @@ public class BaseManagerCenterController {
                 sysBaseConfigCache.init();
 
                 sysBaseConfig.setOperateDesc("更新");
+                noticeSyncSysBaseConfigCache(sysBaseConfig);
             }
         } catch (Exception e) {
             return Result.exception(e.getMessage());
@@ -170,6 +182,9 @@ public class BaseManagerCenterController {
 
             if (result) {
                 sysBaseConfigCache.init();
+
+                sysBaseConfig.setOperateDesc("新增");
+                noticeSyncSysBaseConfigCache(sysBaseConfig);
             }
         } catch (Exception e) {
             return Result.exception(e.getMessage());
@@ -194,5 +209,24 @@ public class BaseManagerCenterController {
     @ResponseBody
     public Result listSysBaseConfig(@RequestBody @ApiParam(name = "基础配置查询参数", required = true) SysBaseConfigQuery sysBaseConfigQuery) {
         return Result.ok(sysBaseConfigService.listSysBaseConfigByCondition(sysBaseConfigQuery));
+    }
+
+    /**
+     * @Description 通知同步基础配置到Redis, 带上标记，方便多实例的时候，其它实例能同步更新本地配置
+     * @Params ==>
+     * @Return void
+     * @Date 2020/5/22 9:25
+     * @Auther YINZHIYU
+     */
+    private void noticeSyncSysBaseConfigCache(SysBaseConfig sysBaseConfig) {
+        sysBaseConfig.setUpdateFlag(true);
+        sysBaseConfig.setUpdateIpPort(netConfig.getLocalIpPort());
+
+        try {
+            //更新Redis
+            redisUtils.set(RedisConstants.SYS_BASE_CONFIG_MAP_KEY, sysBaseConfig);
+        } catch (Exception e) {
+            LogUtils.error(sysBaseConfig, "通知同步基础配置到Redis ==> 操作Redis ==> 异常", e);
+        }
     }
 }

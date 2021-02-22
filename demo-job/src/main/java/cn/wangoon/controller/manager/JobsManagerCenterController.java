@@ -2,6 +2,7 @@ package cn.wangoon.controller.manager;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.wangoon.cache.JobsConfigCache;
+import cn.wangoon.common.config.NetConfig;
 import cn.wangoon.config.JobsConfig;
 import cn.wangoon.common.constants.RedisConstants;
 import cn.wangoon.common.enums.JobStatusEnum;
@@ -57,7 +58,10 @@ public class JobsManagerCenterController {
     private OmsLogService omsLogService;
 
     @Resource
-    JobsConfig jobsConfig;
+    private JobsConfig jobsConfig;
+
+    @Resource
+    private NetConfig netConfig;
 
     /**
      * @Description Job配置页面
@@ -211,7 +215,7 @@ public class JobsManagerCenterController {
 
         try {
             sysJobConfig.setUpdateFlag(true);
-            sysJobConfig.setUpdateIpPort(jobsConfig.getLocalIpPort());
+            sysJobConfig.setUpdateIpPort(netConfig.getLocalIpPort());
 
             //更新调度配置信息
             ElasticJob elasticJob = CastUtil.cast(SpringBootBeanUtil.getBean(sysJobConfig.getJobClassBeanName()));

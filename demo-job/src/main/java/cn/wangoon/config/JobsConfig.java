@@ -1,9 +1,7 @@
 package cn.wangoon.config;
 
 import cn.hutool.core.util.ObjectUtil;
-import cn.wangoon.common.constants.BaseConstants;
 import cn.wangoon.common.utils.LogUtils;
-import cn.wangoon.common.utils.NetUtils;
 import com.dangdang.ddframe.job.api.ElasticJob;
 import com.dangdang.ddframe.job.api.dataflow.DataflowJob;
 import com.dangdang.ddframe.job.api.simple.SimpleJob;
@@ -20,7 +18,6 @@ import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.api.GetChildrenBuilder;
 import org.apache.zookeeper.data.Stat;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -36,9 +33,6 @@ import java.util.stream.Collectors;
  **/
 @Configuration
 public class JobsConfig {
-
-    @Resource
-    Environment environment;
 
     @Resource
     public ZookeeperRegistryCenter regCenter;
@@ -172,27 +166,5 @@ public class JobsConfig {
         } catch (Exception e) {
             LogUtils.error(String.format("删除Zookeeper下Oms系统 节点%s以及子节点 ==> 异常", nodePath), e);
         }
-    }
-
-    /**
-     * @Description 获取Ip+端口
-     * @Params ==>
-     * @Return java.lang.String
-     * @Date 2020/5/22 10:13
-     * @Auther YINZHIYU
-     */
-    public String getLocalIpPort() {
-        return String.format("%s:%s", NetUtils.getLocalIP(), getLocalPort());
-    }
-
-    /**
-     * @Description 获取应用端口
-     * @Params ==>
-     * @Return java.lang.String
-     * @Date 2020/5/22 10:11
-     * @Auther YINZHIYU
-     */
-    public String getLocalPort() {
-        return environment.getProperty(BaseConstants.LOCAL_SERVER_PORT);
     }
 }

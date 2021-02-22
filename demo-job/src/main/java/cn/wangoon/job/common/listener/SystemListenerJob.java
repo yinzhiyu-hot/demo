@@ -7,6 +7,7 @@ import cn.wangoon.cache.SysBaseConfigCache;
 import cn.wangoon.common.annotations.CronExpression;
 import cn.wangoon.common.annotations.ShardingItemParams;
 import cn.wangoon.common.annotations.ShardingTotalCount;
+import cn.wangoon.common.config.NetConfig;
 import cn.wangoon.common.constants.RedisConstants;
 import cn.wangoon.common.enums.JobStatusEnum;
 import cn.wangoon.common.utils.CastUtil;
@@ -56,6 +57,9 @@ public class SystemListenerJob extends BaseSimpleJob {
 
     @Resource
     private JobsConfig jobsConfig;
+
+    @Resource
+    private NetConfig netConfig;
 
     @Override
     protected void executeJob(ShardingContext shardingContext) {
@@ -108,7 +112,7 @@ public class SystemListenerJob extends BaseSimpleJob {
                 }
 
                 //如果是更新配置操作
-                if (entry.getValue().isUpdateFlag() && !StrUtil.equals(jobsConfig.getLocalIpPort(), entry.getValue().getUpdateIpPort())) {
+                if (entry.getValue().isUpdateFlag() && !StrUtil.equals(netConfig.getLocalIpPort(), entry.getValue().getUpdateIpPort())) {
                     //更新调度配置信息
                     ElasticJob elasticJob = CastUtil.cast(SpringBootBeanUtil.getBean(entry.getKey()));
                     LiteJobConfiguration liteJobConfiguration = jobsConfig.getLiteJobConfiguration(elasticJob, entry.getValue().getCronExpression(), entry.getValue().getShardingTotalCount(), entry.getValue().getShardingItemParams());
@@ -159,7 +163,7 @@ public class SystemListenerJob extends BaseSimpleJob {
             }
 
             //如果存在更新/删除/新增配置操作
-            if (sysBaseConfig.isUpdateFlag() && !StrUtil.equals(jobsConfig.getLocalIpPort(), sysBaseConfig.getUpdateIpPort())) {
+            if (sysBaseConfig.isUpdateFlag() && !StrUtil.equals(netConfig.getLocalIpPort(), sysBaseConfig.getUpdateIpPort())) {
 
                 //重新从数据库加载基础配置
                 sysBaseConfigCache.init();
