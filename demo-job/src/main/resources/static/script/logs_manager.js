@@ -78,7 +78,7 @@ function initTable() {
         pageNumber: 1,//初始化加载第一页，默认第一页
         pageSize: 10,//每页的记录行数（*）
         pageList: [10, 15, 20, 25, 30],//可供选择的每页的行数（*）
-        sidePagination: "client" //分页方式：client客户端分页，server服务端分页（*）
+        sidePagination: "server" //分页方式：client客户端分页，server服务端分页（*）
     });
 
     //得到查询的参数

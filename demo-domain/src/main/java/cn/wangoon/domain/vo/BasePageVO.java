@@ -29,7 +29,7 @@ public class BasePageVO implements Serializable {
      * 码距
      */
     @ApiModelProperty(value = "码距")
-    private Integer pageSize = 20;
+    private Integer pageSize = 10;
 
     /**
      * 排序字段

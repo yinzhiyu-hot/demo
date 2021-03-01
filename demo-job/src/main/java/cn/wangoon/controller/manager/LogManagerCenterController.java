@@ -6,8 +6,11 @@ import cn.hutool.core.util.ObjectUtil;
 import cn.wangoon.common.constants.SysBaseConfigConstants;
 import cn.wangoon.domain.dto.SysLogDto;
 import cn.wangoon.domain.entity.SysLog;
+import cn.wangoon.domain.vo.BasePageVO;
 import cn.wangoon.service.business.base.OmsLogService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import io.swagger.annotations.Api;
@@ -63,28 +66,27 @@ public class LogManagerCenterController {
      * @Remark
      * @Params ==>
      * @Param omsLogDto
-     * @Return java.util.Map<java.lang.String,java.lang.Object>
+     * @Return java.util.Map<java.lang.String, java.lang.Object>
      * @Date 2020/11/17 14:06
      * @Auther YINZHIYU
      */
     @ApiOperation(value = "日志查询", notes = "日志查询", httpMethod = "GET")
     @RequestMapping(value = "/listPage")
     @ResponseBody
-    public Map<String, Object> listPage(@ApiParam(name = "日志", required = true) SysLogDto sysLogDto) {
+    public Map<String, Object> listPage(@ApiParam(name = "分页", required = true) BasePageVO basePageVO, @ApiParam(name = "日志", required = true) SysLogDto sysLogDto) {
+        Page<SysLog> page = new Page<>(basePageVO.getPageNumber(), basePageVO.getPageSize());
         QueryWrapper<SysLog> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq(SysLog.COL_RECORD_DATE, sysLogDto.getQueryDate());
-        List<SysLog> sysLogList = Lists.newArrayList();
+
         if (ObjectUtil.isNotEmpty(sysLogDto.getHashKey())) {
             queryWrapper.eq(SysLog.COL_BUSINESS_KEY, sysLogDto.getHashKey());
-
         }
         queryWrapper.orderByDesc(SysLog.COL_TS);
-        sysLogList.addAll(omsLogService.list(queryWrapper));
-
+        IPage<SysLog> pages = omsLogService.page(page, queryWrapper);
         //bootstrap-table要求服务器返回的json须包含：total，rows,采取客户端分页，服务端提供全部数据
         Map<String, Object> map = Maps.newHashMap();
-        map.put("total", ObjectUtil.isNotEmpty(sysLogList) ? sysLogList.size() : 0);
-        map.put("rows", sysLogList);
+        map.put("total", pages.getTotal());
+        map.put("rows", pages.getRecords());
         return map;
     }
 }
