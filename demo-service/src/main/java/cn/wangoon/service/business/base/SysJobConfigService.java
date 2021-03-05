@@ -15,4 +15,6 @@ import org.springframework.stereotype.Component;
 @Component
 public interface SysJobConfigService extends IService<SysJobConfig> {
     SysJobConfig getSysJobConfigByCondition(SysJobConfigQuery sysJobConfigQuery);
+
+    boolean updateByCondition(SysJobConfig sysJobConfig);
 }

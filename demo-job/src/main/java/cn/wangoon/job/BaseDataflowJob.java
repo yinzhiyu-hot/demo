@@ -150,7 +150,7 @@ public abstract class BaseDataflowJob<T> implements DataflowJob<T> {
                 sysJobConfigHeartRecord.setId(sysJobConfig.getId());
                 sysJobConfigHeartRecord.setUpdateTime(DateUtil.date());
                 sysJobConfigHeartRecord.setUpdateUser(jobName);
-                recordResult = sysJobConfigService.updateById(sysJobConfigHeartRecord);
+                recordResult = sysJobConfigService.updateByCondition(sysJobConfigHeartRecord);
             }
         } catch (Exception e) {
             LogUtils.error(jobName, radomStr, String.format("[%s]Thread ID: 心跳记录异常", Thread.currentThread().getId()), e);

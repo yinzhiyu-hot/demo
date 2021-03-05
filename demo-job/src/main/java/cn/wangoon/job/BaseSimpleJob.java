@@ -211,7 +211,7 @@ public abstract class BaseSimpleJob implements SimpleJob {
                 sysJobConfigHeartRecord.setId(sysJobConfig.getId());
                 sysJobConfigHeartRecord.setUpdateTime(DateUtil.date());
                 sysJobConfigHeartRecord.setUpdateUser(jobName);
-                recordResult = sysJobConfigService.updateById(sysJobConfigHeartRecord);
+                recordResult = sysJobConfigService.updateByCondition(sysJobConfigHeartRecord);
             }
         } catch (Exception e) {
             LogUtils.error(jobName, radomStr, String.format("[%s]Thread ID: 心跳记录异常", Thread.currentThread().getId()), e);

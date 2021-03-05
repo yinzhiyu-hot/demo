@@ -41,4 +41,9 @@ public class SysJobConfigServiceImpl extends ServiceImpl<SysJobConfigMapper, Sys
         }
         return queryWrapper;
     }
+
+    @Override
+    public boolean updateByCondition(SysJobConfig sysJobConfig) {
+        return this.baseMapper.updateByCondition(sysJobConfig);
+    }
 }

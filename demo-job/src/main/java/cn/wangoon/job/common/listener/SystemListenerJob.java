@@ -104,7 +104,7 @@ public class SystemListenerJob extends BaseSimpleJob {
 
                     //更新数据库job 配置状态
                     SysJobConfig sysJobConfigLocal = entry.getValue();
-                    sysJobConfigService.updateById(sysJobConfigLocal);
+                    sysJobConfigService.updateByCondition(sysJobConfigLocal);
 
                     //同步更新覆盖本地Job配置map
                     JobsConfigCache.sysJobConfigMap.put(entry.getKey(), entry.getValue());
@@ -121,7 +121,7 @@ public class SystemListenerJob extends BaseSimpleJob {
 
                     //更新数据库job配置信息
                     SysJobConfig sysJobConfigLocal = entry.getValue();
-                    sysJobConfigService.updateById(sysJobConfigLocal);
+                    sysJobConfigService.updateByCondition(sysJobConfigLocal);
 
                     //同步更新覆盖本地Job配置map
                     JobsConfigCache.sysJobConfigMap.put(entry.getKey(), entry.getValue());

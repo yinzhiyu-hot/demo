@@ -128,7 +128,7 @@ public class JobsManagerCenterController {
             //更新数据库状态
             sysJobConfigLocal.setJobStatus(JobStatusEnum.START.getStatus());
             sysJobConfigLocal.setUpdateTime(new Date());
-            sysJobConfigService.updateById(sysJobConfigLocal);
+            sysJobConfigService.updateByCondition(sysJobConfigLocal);
 
             //更新本地
             JobsConfigCache.sysJobConfigMap.put(sysJobConfigLocal.getJobClassBeanName(), sysJobConfigLocal);
@@ -175,7 +175,7 @@ public class JobsManagerCenterController {
             //更新数据库状态
             sysJobConfigLocal.setJobStatus(JobStatusEnum.STOP.getStatus());
             sysJobConfigLocal.setUpdateTime(new Date());
-            sysJobConfigService.updateById(sysJobConfigLocal);
+            sysJobConfigService.updateByCondition(sysJobConfigLocal);
 
             //更新本地
             JobsConfigCache.sysJobConfigMap.put(sysJobConfigLocal.getJobClassBeanName(), sysJobConfigLocal);
@@ -223,7 +223,7 @@ public class JobsManagerCenterController {
             JobsConfigCache.jobSchedulerMap.get(sysJobConfig.getJobClassBeanName()).getSchedulerFacade().updateJobConfiguration(liteJobConfiguration);
 
             //更新数据库状态
-            sysJobConfigService.updateById(sysJobConfig);
+            sysJobConfigService.updateByCondition(sysJobConfig);
 
             //更新本地
             JobsConfigCache.sysJobConfigMap.put(sysJobConfig.getJobClassBeanName(), sysJobConfig);

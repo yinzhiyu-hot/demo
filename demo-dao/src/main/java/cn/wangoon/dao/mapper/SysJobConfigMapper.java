@@ -11,4 +11,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @Version 1.0.0.0
  **/
 public interface SysJobConfigMapper extends BaseMapper<SysJobConfig> {
+    boolean updateByCondition(SysJobConfig sysJobConfig);
 }
