@@ -6,7 +6,7 @@ import cn.hutool.core.util.ObjectUtil;
 import cn.wangoon.common.constants.BaseConstants;
 import cn.wangoon.common.enums.SyncTaskStatusEnum;
 import cn.wangoon.domain.common.Result;
-import cn.wangoon.domain.common.SyncTaskBuilder;
+import cn.wangoon.service.builder.SyncTaskBuilder;
 import cn.wangoon.domain.dto.SyncTaskChartDto;
 import cn.wangoon.domain.entity.SyncTask;
 import cn.wangoon.domain.entity.SyncTaskData;

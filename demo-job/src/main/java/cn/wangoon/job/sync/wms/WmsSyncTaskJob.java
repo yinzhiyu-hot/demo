@@ -4,13 +4,10 @@ import cn.wangoon.common.annotations.CronExpression;
 import cn.wangoon.common.annotations.ShardingItemParams;
 import cn.wangoon.common.annotations.ShardingTotalCount;
 import cn.wangoon.job.BaseSimpleJob;
-import cn.wangoon.service.business.job.factory.wms.WmsDataSyncFactory;
 import com.dangdang.ddframe.job.api.ShardingContext;
 import org.quartz.DisallowConcurrentExecution;
 import org.springframework.context.annotation.Description;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.Resource;
 
 /**
  * @Description WMS业务数据同步job
@@ -27,11 +24,8 @@ import javax.annotation.Resource;
 @DisallowConcurrentExecution
 public class WmsSyncTaskJob extends BaseSimpleJob {
 
-    @Resource
-    WmsDataSyncFactory wmsDataSyncFactory;
-
     @Override
     public void executeJob(ShardingContext shardingContext) {
-        super.startExecuteJob(shardingContext, wmsDataSyncFactory);
+        super.startExecuteJob(shardingContext);
     }
 }

@@ -15,7 +15,7 @@ import cn.wangoon.domain.entity.SyncTaskData;
 import cn.wangoon.domain.entity.SyncTaskException;
 import cn.wangoon.domain.entity.SysJobConfig;
 import cn.wangoon.domain.query.SysJobConfigQuery;
-import cn.wangoon.service.business.job.factory.DataSyncFactory;
+import cn.wangoon.job.adapter.DataSyncAdapter;
 import cn.wangoon.service.business.base.*;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.dangdang.ddframe.job.api.ShardingContext;
@@ -37,6 +37,9 @@ import java.util.List;
  **/
 @Component
 public abstract class BaseSimpleJob implements SimpleJob {
+
+    @Resource
+    private DataSyncAdapter dataSyncAdapter;
 
     @Resource
     private SyncTaskService syncTaskService;
@@ -100,7 +103,7 @@ public abstract class BaseSimpleJob implements SimpleJob {
      * @Date 2020/7/9 14:25
      * @Auther YINZHIYU
      */
-    public void startExecuteJob(ShardingContext shardingContext, DataSyncFactory dataSyncFactory) {
+    public void startExecuteJob(ShardingContext shardingContext) {
         //根据分片规则取任务数据
         SyncTaskDto syncTaskDto = new SyncTaskDto();
 
@@ -149,7 +152,7 @@ public abstract class BaseSimpleJob implements SimpleJob {
                 syncTask.setTaskData(taskData);
 
                 //根据task_type 进行业务路由，由不同的入口进行业务处理
-                boolean excuteResult = dataSyncFactory.createDataSync().excute(syncTask);
+                boolean excuteResult = dataSyncAdapter.excute(syncTask);
 
                 if (!excuteResult) {
                     //最后一次重试失败，则更新处理失败

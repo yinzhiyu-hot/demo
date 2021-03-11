@@ -1,14 +1,14 @@
-package cn.wangoon.domain.common;
+package cn.wangoon.service.builder;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.json.JSONUtil;
 import cn.wangoon.common.enums.SyncTaskStatusEnum;
-import cn.wangoon.common.enums.SyncTaskTypeEnum;
 import cn.wangoon.common.utils.StringUtils;
 import cn.wangoon.domain.entity.BaseOrder;
 import cn.wangoon.domain.entity.SyncTask;
 import cn.wangoon.domain.entity.SyncTaskData;
+import cn.wangoon.service.enums.SyncTaskTypeEnum;
 import com.google.common.collect.Lists;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
