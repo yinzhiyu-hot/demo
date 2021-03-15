@@ -9,7 +9,7 @@ import javax.annotation.Resource;
 
 /**
  * @Description 应用程序启动入口
- * @PackagePath cn.wangoon.OmsApiApplication
+ * @PackagePath cn.wangoon.JobApplication
  * @Author YINZHIYU
  * @Date 2020/6/15 14:42
  * @Version 1.0.0.0
@@ -29,7 +29,7 @@ public class JobApplication {
 
             LogUtils.info("系统启动完成");
         } catch (Exception e) {
-            LogUtils.error(args, "SpringApplication.run(OmsApiApplication.class, args) ==> 异常", e);
+            LogUtils.error(args, "SpringApplication.run(JobApplication.class, args) ==> 异常", e);
             System.exit(0);//正常退出
             //System.exit(1);//强制退出
         }

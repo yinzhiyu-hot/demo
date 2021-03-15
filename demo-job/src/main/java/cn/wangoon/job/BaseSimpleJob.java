@@ -54,7 +54,7 @@ public abstract class BaseSimpleJob implements SimpleJob {
     private SysJobConfigService sysJobConfigService;
 
     @Resource
-    protected OmsLogService omsLogService;
+    protected SysLogService sysLogService;
 
     protected abstract void executeJob(ShardingContext shardingContext);
 

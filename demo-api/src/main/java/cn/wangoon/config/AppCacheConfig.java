@@ -1,7 +1,7 @@
 package cn.wangoon.config;
 
 import cn.wangoon.cache.SysBaseConfigCache;
-import cn.wangoon.common.utils.LogUtils; 
+import cn.wangoon.common.utils.LogUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;

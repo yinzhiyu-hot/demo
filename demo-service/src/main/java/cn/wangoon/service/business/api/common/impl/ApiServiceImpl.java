@@ -6,7 +6,7 @@ import cn.wangoon.common.utils.LogUtils;
 import cn.wangoon.common.utils.SpringBootBeanUtil;
 import cn.wangoon.domain.common.BussinessBody;
 import cn.wangoon.domain.common.Result;
-import cn.wangoon.service.business.api.common.OmsApiService;
+import cn.wangoon.service.business.api.common.ApiService;
 import cn.wangoon.service.enums.ApiEnum;
 import org.springframework.stereotype.Service;
 
@@ -17,15 +17,15 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 
 /**
- * @Description Oms API 接口实现bean
+ * @Description API 接口实现bean
  * @Remark 适配对应方法
- * @PackagePath cn.wangoon.service.rest.base.impl.OmsApiServiceImpl
+ * @PackagePath cn.wangoon.service.rest.base.impl.ApiServiceImpl
  * @Author YINZHIYU
  * @Date 2020/11/3 10:20
  * @Version 1.0.0.0
  **/
 @Service
-public class OmsApiServiceImpl implements OmsApiService {
+public class ApiServiceImpl implements ApiService {
 
     /*
      * @Description 统一执行入口

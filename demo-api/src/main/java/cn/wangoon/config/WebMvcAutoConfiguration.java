@@ -1,6 +1,5 @@
 package cn.wangoon.config;
 
-import cn.wangoon.common.utils.SpringBootBeanUtil;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -27,7 +26,7 @@ public class WebMvcAutoConfiguration implements WebMvcConfigurer {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        //registry.addInterceptor(SpringBootBeanUtil.getBean(LoginContextInterceptor.class));//OMS系统后台管理中心登录拦截器，线上环境访问需登录
+        //registry.addInterceptor(SpringBootBeanUtil.getBean(LoginContextInterceptor.class));//系统后台管理中心登录拦截器，线上环境访问需登录
     }
 
     /**

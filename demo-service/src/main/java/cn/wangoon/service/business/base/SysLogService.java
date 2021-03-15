@@ -8,13 +8,13 @@ import org.springframework.stereotype.Component;
 /**
  * @Description 日志
  * @Remark
- * @PackagePath cn.wangoon.service.business.OmsLogService
+ * @PackagePath cn.wangoon.service.business.SysLogService
  * @Author YINZHIYU
  * @Date 2020/9/27 10:32
  * @Version 1.0.0.0
  **/
 @Component
-public interface OmsLogService extends IService<SysLog> {
+public interface SysLogService extends IService<SysLog> {
 
     void recordLog(SysLog sysLog);
 

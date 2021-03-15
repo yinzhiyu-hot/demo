@@ -3,23 +3,23 @@ package cn.wangoon.service.business.base.impl;
 import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.json.JSONUtil;
 import cn.wangoon.common.utils.LogUtils;
-import cn.wangoon.dao.mapper.OmsLogMapper;
+import cn.wangoon.dao.mapper.SysLogMapper;
 import cn.wangoon.domain.common.Result;
 import cn.wangoon.domain.entity.SysLog;
-import cn.wangoon.service.business.base.OmsLogService;
+import cn.wangoon.service.business.base.SysLogService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
  * @Description 日志记录
  * @Remark
- * @PackagePath cn.wangoon.service.business.impl.OmsLogServiceImpl
+ * @PackagePath cn.wangoon.service.business.impl.SysLogServiceImpl
  * @Author YINZHIYU
  * @Date 2020/9/27 10:32
  * @Version 1.0.0.0
  **/
 @Service
-public class OmsLogServiceImpl extends ServiceImpl<OmsLogMapper, SysLog> implements OmsLogService {
+public class SysLogServiceImpl extends ServiceImpl<SysLogMapper, SysLog> implements SysLogService {
 
     @Override
     public void recordLog(SysLog sysLog) {

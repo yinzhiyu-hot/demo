@@ -14,7 +14,7 @@ import cn.wangoon.domain.common.Result;
 import cn.wangoon.domain.entity.SysLog;
 import cn.wangoon.domain.entity.SysJobConfig;
 import cn.wangoon.domain.vo.BasePageVO;
-import cn.wangoon.service.business.base.OmsLogService;
+import cn.wangoon.service.business.base.SysLogService;
 import cn.wangoon.service.business.base.SysJobConfigService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -55,7 +55,7 @@ public class JobsManagerCenterController {
     private SysJobConfigService sysJobConfigService;
 
     @Resource
-    private OmsLogService omsLogService;
+    private SysLogService sysLogService;
 
     @Resource
     private JobsConfig jobsConfig;
@@ -141,7 +141,7 @@ public class JobsManagerCenterController {
                 sysJobConfigMapRedis.put(sysJobConfigLocal.getJobClassBeanName(), sysJobConfigLocal);
                 redisUtils.set(RedisConstants.SYS_JOB_CONFIG_MAP_KEY, sysJobConfigMapRedis);
 
-                omsLogService.recordLog(new SysLog(sysJobConfigLocal.getJobClassBeanName(), String.format("%s 启动成功。", sysJobConfigLocal.getJobClassBeanName())));
+                sysLogService.recordLog(new SysLog(sysJobConfigLocal.getJobClassBeanName(), String.format("%s 启动成功。", sysJobConfigLocal.getJobClassBeanName())));
 
             } catch (Exception e) {
                 LogUtils.error(sysJobConfig, "Job 启动异常", e);
@@ -188,7 +188,7 @@ public class JobsManagerCenterController {
                 sysJobConfigMapRedis.put(sysJobConfigLocal.getJobClassBeanName(), sysJobConfigLocal);
                 redisUtils.set(RedisConstants.SYS_JOB_CONFIG_MAP_KEY, sysJobConfigMapRedis);
 
-                omsLogService.recordLog(new SysLog(sysJobConfigLocal.getJobClassBeanName(), String.format("%s 停止成功。", sysJobConfigLocal.getJobClassBeanName())));
+                sysLogService.recordLog(new SysLog(sysJobConfigLocal.getJobClassBeanName(), String.format("%s 停止成功。", sysJobConfigLocal.getJobClassBeanName())));
 
             } catch (Exception e) {
                 LogUtils.error(sysJobConfig, "Job 停止异常", e);
@@ -236,7 +236,7 @@ public class JobsManagerCenterController {
                 sysJobConfigMapRedis.put(sysJobConfig.getJobClassBeanName(), sysJobConfig);
                 redisUtils.set(RedisConstants.SYS_JOB_CONFIG_MAP_KEY, sysJobConfigMapRedis);
 
-                omsLogService.recordLog(new SysLog(sysJobConfig.getJobClassBeanName(), String.format("%s 编辑成功。", sysJobConfig.getJobClassBeanName())));
+                sysLogService.recordLog(new SysLog(sysJobConfig.getJobClassBeanName(), String.format("%s 编辑成功。", sysJobConfig.getJobClassBeanName())));
             } catch (Exception e) {
                 LogUtils.error(sysJobConfig, "Job 修改异常", e);
             }

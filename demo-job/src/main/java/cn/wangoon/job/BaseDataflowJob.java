@@ -19,7 +19,7 @@ import java.util.List;
 
 /**
  * @Description 流式处理Job
- * @Remark oms统一采用非流式处理数据规则[streamingProcess: false 是否流式处理数据]
+ * @Remark 统一采用非流式处理数据规则[streamingProcess: false 是否流式处理数据]
  * 可通过DataflowJobConfiguration配置是否流式处理。
  * 1.流式处理数据只有fetchData方法的返回值为null或集合长度为空时，作业才停止抓取，否则作业将一直运行下去；
  * 2.非流式处理数据则只会在每次作业执行过程中执行一次fetchData方法和processData方法，随即完成本次作业。

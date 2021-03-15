@@ -25,9 +25,9 @@ public class MailUtils {
     public void send(String content) {
         ThreadUtil.execAsync(() -> {
             try {
-                MailUtil.send(mailConfig.mailUsernameTo, mailConfig.mailUsernameCc, StrUtil.EMPTY, String.format("Oms系统自动发送[%s]", DateUtil.date().toString()), String.join("\r\n ==>", NetUtils.getLocalIP(), content), false);
+                MailUtil.send(mailConfig.mailUsernameTo, mailConfig.mailUsernameCc, StrUtil.EMPTY, String.format("系统自动发送[%s]", DateUtil.date().toString()), String.join("\r\n ==>", NetUtils.getLocalIP(), content), false);
             } catch (Exception ex) {
-                LogUtils.error(String.format("Oms系统自动发送邮件异常：%s\r\n发送内容：%s", ex, content));
+                LogUtils.error(String.format("系统自动发送邮件异常：%s\r\n发送内容：%s", ex, content));
             }
         });
     }

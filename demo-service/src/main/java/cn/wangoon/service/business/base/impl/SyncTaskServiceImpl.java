@@ -6,7 +6,7 @@ import cn.wangoon.domain.entity.SysLog;
 import cn.wangoon.domain.entity.SyncTask;
 import cn.wangoon.domain.vo.SyncTaskChartVO;
 import cn.wangoon.manager.SyncTaskManager;
-import cn.wangoon.service.business.base.OmsLogService;
+import cn.wangoon.service.business.base.SysLogService;
 import cn.wangoon.service.business.base.SyncTaskService;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -32,7 +32,7 @@ public class SyncTaskServiceImpl extends ServiceImpl<SyncTaskMapper, SyncTask> i
     private SyncTaskManager syncTaskManager;
 
     @Resource
-    private OmsLogService omsLogService;
+    private SysLogService sysLogService;
 
     @Override
     public boolean insertSyncTask(SyncTask syncTask) {
@@ -82,6 +82,6 @@ public class SyncTaskServiceImpl extends ServiceImpl<SyncTaskMapper, SyncTask> i
     @Override
     public void dataCarryForward(List<Long> idList) {
         int count = syncTaskManager.dataCarryForward(idList);
-        omsLogService.recordLog(new SysLog("dataCarryForward", String.format("本次结转sync_task任务表数据记录 %s 条", count)));
+        sysLogService.recordLog(new SysLog("dataCarryForward", String.format("本次结转sync_task任务表数据记录 %s 条", count)));
     }
 }

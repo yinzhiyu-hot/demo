@@ -139,7 +139,7 @@ public class JobsConfig {
             GetChildrenBuilder childrenBuilder = client.getChildren();
             childrenList.addAll(childrenBuilder.storingStatIn(stat).forPath(nodePath));
         } catch (Exception e) {
-            LogUtils.error(String.format("获取Zookeeper下Oms系统 节点%s下所有节点 ==> 异常", nodePath), e);
+            LogUtils.error(String.format("获取Zookeeper下系统 节点%s下所有节点 ==> 异常", nodePath), e);
         }
 
         return childrenList.stream().map(item -> item = String.format("/%s", item)).collect(Collectors.toList());
@@ -164,7 +164,7 @@ public class JobsConfig {
             client.getData().storingStatIn(stat).forPath(nodePath);
             client.delete().deletingChildrenIfNeeded().withVersion(stat.getVersion()).forPath(nodePath);
         } catch (Exception e) {
-            LogUtils.error(String.format("删除Zookeeper下Oms系统 节点%s以及子节点 ==> 异常", nodePath), e);
+            LogUtils.error(String.format("删除Zookeeper下系统 节点%s以及子节点 ==> 异常", nodePath), e);
         }
     }
 }

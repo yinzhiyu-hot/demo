@@ -27,7 +27,7 @@ public class WebMvcAutoConfiguration implements WebMvcConfigurer {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        //registry.addInterceptor(SpringBootBeanUtil.getBean(LoginContextInterceptor.class));//OMS系统后台管理中心登录拦截器，线上环境访问需登录
+        //registry.addInterceptor(SpringBootBeanUtil.getBean(LoginContextInterceptor.class));//系统后台管理中心登录拦截器，线上环境访问需登录
     }
 
     /**

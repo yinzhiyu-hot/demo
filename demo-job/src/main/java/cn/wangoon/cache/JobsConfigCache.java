@@ -14,7 +14,7 @@ import cn.wangoon.common.enums.JobStatusEnum;
 import cn.wangoon.common.utils.*;
 import cn.wangoon.domain.entity.SysJobConfig;
 import cn.wangoon.domain.entity.SysLog;
-import cn.wangoon.service.business.base.OmsLogService;
+import cn.wangoon.service.business.base.SysLogService;
 import cn.wangoon.service.business.base.SysJobConfigService;
 import cn.wangoon.job.BaseDataflowJob;
 import cn.wangoon.job.BaseSimpleJob;
@@ -53,7 +53,7 @@ public class JobsConfigCache implements BaseCache {
     private RedisUtils redisUtils;
 
     @Resource
-    private OmsLogService omsLogService;
+    private SysLogService sysLogService;
 
     /**
      * Job 调度map，便于管理启停
@@ -154,9 +154,9 @@ public class JobsConfigCache implements BaseCache {
                         sysJobConfig.setJobStatus(JobStatusEnum.STOP.getStatus());
                     }
 
-                    sysJobConfig.setCreateUser("Oms-Auto");
+                    sysJobConfig.setCreateUser("Sys-Auto");
                     sysJobConfig.setCreateTime(DateUtil.date());
-                    sysJobConfig.setUpdateUser("Oms-Auto");
+                    sysJobConfig.setUpdateUser("Sys-Auto");
                     sysJobConfig.setUpdateTime(DateUtil.date());
 
                     //数据库新增job配置
@@ -175,12 +175,12 @@ public class JobsConfigCache implements BaseCache {
                         sysJobConfigMap.put(sysJobConfig.getJobClassBeanName(), sysJobConfig);//便于管理JOB状态
                     }
                 } catch (Exception e) {
-                    omsLogService.recordLog(new SysLog("startJobs", String.format("系统启动时启停定时任务 %s 异常 ==> %s。", sysJobConfig.getJobClassBeanName(), e)));
+                    sysLogService.recordLog(new SysLog("startJobs", String.format("系统启动时启停定时任务 %s 异常 ==> %s。", sysJobConfig.getJobClassBeanName(), e)));
                 }
             }
 
             //全部初始化好后，再检查并删除需要废弃的Zk中的Job节点(删除数据库需要废弃的节点，在此同步删除Zk中的节点)
-            List<String> zkNodes = jobsConfig.getChildNodes("/");//Zk中Oms系统下的所有JOB节点
+            List<String> zkNodes = jobsConfig.getChildNodes("/");//Zk中系统下的所有JOB节点
             List<String> dbNodes = sysJobConfigs.stream().map(SysJobConfig::getJobClassBeanName).collect(Collectors.toList());//数据存在的节点
             List<String> zkDeleteNodes = zkNodes.stream().filter(node -> {
                 String temp = node.substring(node.lastIndexOf(".") + 1);
@@ -200,7 +200,7 @@ public class JobsConfigCache implements BaseCache {
             }
 
         } catch (Exception e) {
-            omsLogService.recordLog(new SysLog("startJobs", String.format("加载启动定时任务异常 ==> %s。", e)));
+            sysLogService.recordLog(new SysLog("startJobs", String.format("加载启动定时任务异常 ==> %s。", e)));
         }
     }
 }

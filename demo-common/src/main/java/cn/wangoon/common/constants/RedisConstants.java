@@ -16,7 +16,7 @@ public interface RedisConstants {
     /**
      * 前缀
      */
-    String SYS_PREFIX = "OMS:";
+    String SYS_PREFIX = "SYS:";
  
     /**
      * 配置信息的缓存

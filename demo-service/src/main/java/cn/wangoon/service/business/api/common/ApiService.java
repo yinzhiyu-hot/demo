@@ -8,15 +8,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @Description Oms API 接口定义
+ * @Description API 接口定义
  * @Remark
- * @PackagePath cn.wangoon.service.rest.base.OmsApiService
+ * @PackagePath cn.wangoon.service.rest.base.ApiService
  * @Author YINZHIYU
  * @Date 2020/11/3 10:19
  * @Version 1.0.0.0
  **/
 @Service
-public interface OmsApiService {
+public interface ApiService {
 
     Result<Object> execute(BussinessBody bussinessBody, HttpServletRequest request, HttpServletResponse response);
 

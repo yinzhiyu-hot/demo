@@ -8,14 +8,14 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @Description Oms订单日志
- * @PackagePath cn.wangoon.domain.dto.OmsLogDto
+ * @Description 系统日志
+ * @PackagePath cn.wangoon.domain.dto.SysLogDto
  * @Author YINZHIYU
  * @Date 2020/5/25 13:54
  * @Version 1.0.0.0
  **/
 @Data
-@ApiModel(description = "Oms日志")
+@ApiModel(description = "系统日志")
 public class SysLogDto implements Serializable {
 
     /**

@@ -15,14 +15,14 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @Description OMS日志
+ * @Description 系统日志
  * @Remark
- * @PackagePath cn.wangoon.domain.entity.OmsLog
+ * @PackagePath cn.wangoon.domain.entity.SysLog
  * @Author YINZHIYU
  * @Date 2020/9/27 10:32
  * @Version 1.0.0.0
  **/
-@ApiModel(description = "OMS日志")
+@ApiModel(description = "系统日志")
 @Data
 @TableName(value = "sys_log")
 public class SysLog implements Serializable {

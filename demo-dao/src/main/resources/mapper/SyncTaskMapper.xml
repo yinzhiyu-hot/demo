@@ -31,7 +31,7 @@
         <result column="finish_date" property="finishDate"/>
         <result column="ts" property="ts"/>
 
-        <!-- 这句特别重要，它的作用就是将getOmsSelfDeliveryOrderItemSplitListById取出的结果集映射到OmsSelfDeliveryOrderVO这个Javabean中的itemSplitList属性 -->
+        <!-- 这句特别重要，它的作用就是将getSyncTaskDataListById取出的结果集映射到SyncTask这个Javabean中的syncTaskDataList属性 -->
         <collection property="syncTaskDataList" column="id" ofType="cn.wangoon.domain.entity.SyncTaskData"
                     select="getSyncTaskDataListById"/>
     </resultMap>

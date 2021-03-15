@@ -7,7 +7,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * @Description 通用的Oms Api 请求体
+ * @Description 通用的Api 请求体
  * @Remark
  * @PackagePath cn.wangoon.domain.common.BussinessBody
  * @Author YINZHIYU
@@ -15,7 +15,7 @@ import java.io.Serializable;
  * @Version 1.0.0.0
  **/
 @Data
-@ApiModel(description = "Oms Api 接口调用请求体")
+@ApiModel(description = "Api 接口调用请求体")
 public class BussinessBody implements Serializable {
 
     @ApiModelProperty(value = "业务类型")

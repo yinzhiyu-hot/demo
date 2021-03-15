@@ -2,7 +2,7 @@ package cn.wangoon.controller;
 
 import cn.wangoon.domain.common.BussinessBody;
 import cn.wangoon.domain.common.Result;
-import cn.wangoon.service.business.api.common.OmsApiService;
+import cn.wangoon.service.business.api.common.ApiService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -17,23 +17,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @Description Oms Api 通用接口
+ * @Description Api 通用接口
  * @Remark
- * @PackagePath cn.wangoon.controller.OmsApiController
+ * @PackagePath cn.wangoon.controller.ApiController
  * @Author YINZHIYU
  * @Date 2020/11/3 11:03
  * @Version 1.0.0.0
  **/
-@Api(tags = "Oms Api 通用接口")
+@Api(tags = "Api 通用接口")
 @Controller
 @RequestMapping(value = "/api")
 public class ApiController {
 
     @Resource
-    private OmsApiService omsApiService;
+    private ApiService apiService;
 
     /**
-     * @Description Oms Api 通用执行接口
+     * @Description Api 通用执行接口
      * @Remark
      * @Params ==>
      * @Param bussinessBody
@@ -43,15 +43,15 @@ public class ApiController {
      * @Date 2020/11/17 14:07
      * @Auther YINZHIYU
      */
-    @ApiOperation(value = "Oms Api 通用执行接口", notes = "Oms Api 通用执行接口", httpMethod = "POST")
+    @ApiOperation(value = "Api 通用执行接口", notes = "Api 通用执行接口", httpMethod = "POST")
     @PostMapping("/execute")
     @ResponseBody
-    public Result<Object> execute(@RequestBody @ApiParam(name = "Oms Api 执行业务请求体", required = true) BussinessBody bussinessBody, HttpServletRequest request, HttpServletResponse response) {
-        return omsApiService.execute(bussinessBody, request, response);
+    public Result<Object> execute(@RequestBody @ApiParam(name = "Api 执行业务请求体", required = true) BussinessBody bussinessBody, HttpServletRequest request, HttpServletResponse response) {
+        return apiService.execute(bussinessBody, request, response);
     }
 
     /**
-     * @Description Oms Api 通用查询接口
+     * @Description Api 通用查询接口
      * @Remark
      * @Params ==>
      * @Param bussinessBody
@@ -61,10 +61,10 @@ public class ApiController {
      * @Date 2020/11/17 14:07
      * @Auther YINZHIYU
      */
-    @ApiOperation(value = "Oms Api 通用查询接口", notes = "Oms Api 通用查询接口", httpMethod = "POST")
+    @ApiOperation(value = "Api 通用查询接口", notes = "Api 通用查询接口", httpMethod = "POST")
     @PostMapping("/query")
     @ResponseBody
-    public Result<Object> query(@RequestBody @ApiParam(name = "Oms Api 查询业务请求体", required = true) BussinessBody bussinessBody, HttpServletRequest request, HttpServletResponse response) {
-        return omsApiService.query(bussinessBody, request, response);
+    public Result<Object> query(@RequestBody @ApiParam(name = "Api 查询业务请求体", required = true) BussinessBody bussinessBody, HttpServletRequest request, HttpServletResponse response) {
+        return apiService.query(bussinessBody, request, response);
     }
 }

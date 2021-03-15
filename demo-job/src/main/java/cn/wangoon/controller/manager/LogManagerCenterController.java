@@ -7,7 +7,7 @@ import cn.wangoon.common.constants.SysBaseConfigConstants;
 import cn.wangoon.domain.dto.SysLogDto;
 import cn.wangoon.domain.entity.SysLog;
 import cn.wangoon.domain.vo.BasePageVO;
-import cn.wangoon.service.business.base.OmsLogService;
+import cn.wangoon.service.business.base.SysLogService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -38,7 +38,7 @@ import java.util.Map;
 public class LogManagerCenterController {
 
     @Resource
-    private OmsLogService omsLogService;
+    private SysLogService sysLogService;
 
     /**
      * @Description 日志页面
@@ -65,7 +65,7 @@ public class LogManagerCenterController {
      * @Description 日志
      * @Remark
      * @Params ==>
-     * @Param omsLogDto
+     * @Param sysLogDto
      * @Return java.util.Map<java.lang.String, java.lang.Object>
      * @Date 2020/11/17 14:06
      * @Auther YINZHIYU
@@ -82,7 +82,7 @@ public class LogManagerCenterController {
             queryWrapper.eq(SysLog.COL_BUSINESS_KEY, sysLogDto.getHashKey());
         }
         queryWrapper.orderByDesc(SysLog.COL_TS);
-        IPage<SysLog> pages = omsLogService.page(page, queryWrapper);
+        IPage<SysLog> pages = sysLogService.page(page, queryWrapper);
         //bootstrap-table要求服务器返回的json须包含：total，rows,采取客户端分页，服务端提供全部数据
         Map<String, Object> map = Maps.newHashMap();
         map.put("total", pages.getTotal());

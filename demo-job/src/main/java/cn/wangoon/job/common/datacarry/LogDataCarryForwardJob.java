@@ -6,8 +6,8 @@ import cn.wangoon.common.annotations.CronExpression;
 import cn.wangoon.common.annotations.ShardingItemParams;
 import cn.wangoon.common.annotations.ShardingTotalCount;
 import cn.wangoon.common.constants.SysBaseConfigConstants;
-import cn.wangoon.service.business.base.OmsLogService;
 import cn.wangoon.job.BaseSimpleJob;
+import cn.wangoon.service.business.base.SysLogService;
 import com.dangdang.ddframe.job.api.ShardingContext;
 import org.quartz.DisallowConcurrentExecution;
 import org.springframework.context.annotation.Description;
@@ -18,9 +18,9 @@ import javax.annotation.Resource;
 /**
  * @Description 日志表数据结转 Job
  * @Remark
- * @PackagePath cn.wangoon.service.job.datacarry.omslog.LogDataCarryForwardJob
+ * @PackagePath cn.wangoon.job.common.datacarry.LogDataCarryForwardJob
  * @Author YINZHIYU
- * @Date 2020/10/10 20:45
+ * @Date 2021/3/15 14:51
  * @Version 1.0.0.0
  **/
 @Component("LogDataCarryForwardJob")
@@ -32,11 +32,11 @@ import javax.annotation.Resource;
 public class LogDataCarryForwardJob extends BaseSimpleJob {
 
     @Resource
-    private OmsLogService omsLogService;
+    private SysLogService sysLogService;
 
     @Override
     public void executeJob(ShardingContext shardingContext) {
         String recordDate = DateUtil.format(DateUtil.offsetDay(DateUtil.date(), SysBaseConfigConstants.LOG_CARRY_FORWARD_DAY_OFFSET), DatePattern.NORM_DATE_PATTERN);
-        omsLogService.dataCarryForward(recordDate);
+        sysLogService.dataCarryForward(recordDate);
     }
 }

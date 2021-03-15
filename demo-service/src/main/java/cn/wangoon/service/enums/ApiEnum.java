@@ -1,7 +1,7 @@
 package cn.wangoon.service.enums;
 
 import cn.hutool.core.util.StrUtil;
-import cn.wangoon.service.business.base.impl.OmsLogServiceImpl;
+import cn.wangoon.service.business.base.impl.SysLogServiceImpl;
 import cn.wangoon.service.business.base.impl.SysBaseConfigServiceImpl;
 
 /**
@@ -13,7 +13,7 @@ import cn.wangoon.service.business.base.impl.SysBaseConfigServiceImpl;
  * @Version 1.0.0.0
  **/
 public enum ApiEnum {
-    RECORD_LOG("记录日志", "RECORD_LOG", OmsLogServiceImpl.class, "recordLog"),
+    RECORD_LOG("记录日志", "RECORD_LOG", SysLogServiceImpl.class, "recordLog"),
     LIST_BASE_CONFIG("查询基础配置", "LIST_BASE_CONFIG", SysBaseConfigServiceImpl.class, "listSysBaseConfig");
 
     // 成员变量

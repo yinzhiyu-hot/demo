@@ -5,7 +5,7 @@ import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.json.JSONUtil;
 import cn.wangoon.common.enums.SyncTaskStatusEnum;
 import cn.wangoon.common.utils.StringUtils;
-import cn.wangoon.domain.entity.BaseOrder;
+import cn.wangoon.domain.entity.Base;
 import cn.wangoon.domain.entity.SyncTask;
 import cn.wangoon.domain.entity.SyncTaskData;
 import cn.wangoon.service.enums.SyncTaskTypeEnum;
@@ -24,7 +24,7 @@ import java.util.List;
  **/
 @Component
 @Scope("prototype")
-public class SyncTaskBuilder<T extends BaseOrder> {
+public class SyncTaskBuilder<T extends Base> {
 
     /*
      * @Description 批量转换异步任务
@@ -57,10 +57,10 @@ public class SyncTaskBuilder<T extends BaseOrder> {
         //组装任务主档
         SyncTask syncTask = new SyncTask();
         syncTask.setTaskType(syncTaskTypeEnum.getSyncTaskType());
-        if (ObjectUtil.isNotEmpty(t.getWarehouseCode())) {
-            syncTask.setTaskDesc(String.format("%s ==> %s ==> %s 仓", syncTaskTypeEnum.getRemark(), t.getOrderNumber(), t.getWarehouseCode()));
+        if (ObjectUtil.isNotEmpty(t.getExtendRemark())) {
+            syncTask.setTaskDesc(String.format("%s ==> %s", syncTaskTypeEnum.getRemark(), t.getExtendRemark()));
         } else {
-            syncTask.setTaskDesc(String.format("%s ==> %s", syncTaskTypeEnum.getRemark(), t.getOrderNumber()));
+            syncTask.setTaskDesc(syncTaskTypeEnum.getRemark());
         }
         syncTask.setTaskStatus(SyncTaskStatusEnum.WAIT.getTaskStatus());
         syncTask.setProcessCount(0);
