@@ -49,6 +49,6 @@ logging:
 Mail:
   username:
     ##收件人列表(多个请用;拼接)
-    to: thomasyin2021@126.com
+    to: xxxxxxxxxx@126.com
     ##抄送人列表(多个请用;拼接)，此处默认填写发件人邮件，防止554错误
-    cc: thomasyin2021@126.com
+    cc: xxxxxxxxxx@126.com
