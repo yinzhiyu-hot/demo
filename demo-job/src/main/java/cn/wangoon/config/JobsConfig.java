@@ -100,7 +100,7 @@ public class JobsConfig {
          *  流式数据处理参照TbSchedule设计，适用于不间歇的数据处理。
          *
          * streamingProcess: 是否流式处理数据
-         * oms统一采用非流式处理数据规则
+         * 统一采用非流式处理数据规则
          */
         if (elasticJob instanceof DataflowJob) {
             jobTypeConfiguration = new DataflowJobConfiguration(

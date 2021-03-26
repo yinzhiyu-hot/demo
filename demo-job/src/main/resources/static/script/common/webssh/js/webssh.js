@@ -9,7 +9,7 @@ WSSHClient.prototype._generateEndpoint = function () {
     }
     var connection = JSON.parse(Utils.get("connection").val());
     var host = connection.host;
-    var endpoint = protocol + host + ':8082/oms/webssh';
+    var endpoint = protocol + host + ':8082/demo-job/webssh';
     return endpoint;
 };
 

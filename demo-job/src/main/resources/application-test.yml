@@ -50,7 +50,7 @@ logging:
   level:
     cn.wangoon.*: debug
 
-#Oms 邮件收件人配置(多个请用;拼接)
+#邮件收件人配置(多个请用;拼接)
 Mail:
   username:
     ##收件人列表(多个请用;拼接)
