@@ -1,6 +1,7 @@
 package cn.wangoon.cache;
 
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.ClassUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.wangoon.common.annotations.CronExpression;
@@ -183,8 +184,8 @@ public class JobsConfigCache implements BaseCache {
             List<String> zkNodes = jobsConfig.getChildNodes("/");//Zk中系统下的所有JOB节点
             List<String> dbNodes = sysJobConfigs.stream().map(SysJobConfig::getJobClassBeanName).collect(Collectors.toList());//数据存在的节点
             List<String> zkDeleteNodes = zkNodes.stream().filter(node -> {
-                String temp = node.substring(node.lastIndexOf(".") + 1);
-                return !dbNodes.contains(temp);
+                String componentBeanName = ClassUtil.loadClass(node.replace("/",StrUtil.EMPTY)).getAnnotation(Component.class).value();
+                return !dbNodes.contains(componentBeanName);
             }).collect(Collectors.toList());//过滤出在数据库没有的节点
             zkDeleteNodes.forEach(nodePath -> jobsConfig.deleteNode(nodePath));
 
