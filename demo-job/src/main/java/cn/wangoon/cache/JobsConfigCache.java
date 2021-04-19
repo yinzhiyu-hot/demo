@@ -184,7 +184,12 @@ public class JobsConfigCache implements BaseCache {
             List<String> zkNodes = jobsConfig.getChildNodes("/");//Zk中系统下的所有JOB节点
             List<String> dbNodes = sysJobConfigs.stream().map(SysJobConfig::getJobClassBeanName).collect(Collectors.toList());//数据存在的节点
             List<String> zkDeleteNodes = zkNodes.stream().filter(node -> {
-                String componentBeanName = ClassUtil.loadClass(node.replace("/",StrUtil.EMPTY)).getAnnotation(Component.class).value();
+                String componentBeanName = StrUtil.subAfter(node, StrUtil.C_DOT, true);//ZK节点中的Bean名称[ZK节点中的节点名是按照 /+类全名 注册的，此处截取ZK节点中的类名称]
+                try {
+                    componentBeanName = ClassUtil.loadClass(node.replace("/", StrUtil.EMPTY)).getAnnotation(Component.class).value();//通过ZK节点的类全名加载应用中的bean，获取应用中bean配置的bean名称
+                } catch (Exception ex) {
+                    LogUtils.error(String.format("Zookeeper Node 节点 %s,在应用中找不到Bean %s", node, node.replace("/", StrUtil.EMPTY)));
+                }
                 return !dbNodes.contains(componentBeanName);
             }).collect(Collectors.toList());//过滤出在数据库没有的节点
             zkDeleteNodes.forEach(nodePath -> jobsConfig.deleteNode(nodePath));
