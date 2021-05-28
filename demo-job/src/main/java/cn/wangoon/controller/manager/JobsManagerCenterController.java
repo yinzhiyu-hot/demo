@@ -25,6 +25,7 @@ import com.google.common.collect.Maps;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.quartz.CronExpression;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -216,6 +217,11 @@ public class JobsManagerCenterController {
         try {
             sysJobConfig.setUpdateFlag(true);
             sysJobConfig.setUpdateIpPort(netConfig.getLocalIpPort());
+
+            //校验表达式是否合法
+            if (!CronExpression.isValidExpression(sysJobConfig.getCronExpression())) {
+                return Result.fail("Job 修改失败，Cron表达式不合法，请重新录入！");
+            }
 
             //更新调度配置信息
             ElasticJob elasticJob = CastUtil.cast(SpringBootBeanUtil.getBean(sysJobConfig.getJobClassBeanName()));

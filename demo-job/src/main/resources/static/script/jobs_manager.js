@@ -329,7 +329,7 @@ function submitUpdate(value) {
                     } else {
                         var f = dialog({
                             title: '消息',
-                            width: 200,
+                            width: 300,
                             zIndex: 999999999,
                             content: result.error
                         });
